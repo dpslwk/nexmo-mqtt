@@ -1,8 +1,9 @@
 <?php
 use Dotenv\Dotenv;
+use Slim\Factory\AppFactory;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;;
 use karpy47\PhpMqttClient\MQTTClient;
-use \Psr\Http\Message\ResponseInterface as Response;
-use \Psr\Http\Message\ServerRequestInterface as Request;
 
 require 'vendor/autoload.php';
 
@@ -10,13 +11,11 @@ $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 $config = require 'config.php';
+$settings = $config['settings'];
 
-$app = new \Slim\App($config);
+$app = AppFactory::create();;
 
-$container = $app->getContainer();
-$settings = $container->get('settings');
-
-$handler = function (Request $request, Response $response) use ($settings) {
+$handler = function (Request $request, Response $response, $args) use ($settings) {
     $params = $request->getParsedBody();
 
     // Fall back to query parameters if needed

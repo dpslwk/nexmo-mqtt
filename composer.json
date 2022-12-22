@@ -1,7 +1,8 @@
 {
     "require": {
-        "slim/slim": "^3.8",
+        "slim/slim": "^4.11",
         "karpy47/php-mqtt-client": "^1.0",
-        "vlucas/phpdotenv": "^5.0"
+        "vlucas/phpdotenv": "^5.0",
+        "slim/psr7": "^1.6"
     }
 }
